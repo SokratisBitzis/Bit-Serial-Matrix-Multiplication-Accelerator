@@ -16,6 +16,7 @@ module MSB_complement_cell #(parameter bits = 2)
   logic [bits-2:0] temp_in;
   generate
     genvar i;
+    // In the MSB complement cell, in opposition to the simple complement cell, every input (save for the one corresponding to A's MSB) is complemented
     for (i = 0; i < bits - 1; i++) begin
       assign local_in[i] = complement ^ in[i];
       assign local_additive[i] = additive;
