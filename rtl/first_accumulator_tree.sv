@@ -1,5 +1,4 @@
 `timescale 1ns / 1ps
-// or it will equal 'bits' for the tree producing the partial results
 module first_accumulator_tree #(
   parameter bits = 2,
   parameter tree_levels = 4,

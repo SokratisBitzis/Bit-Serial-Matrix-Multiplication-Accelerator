@@ -1,6 +1,4 @@
 `timescale 1ns / 1ps
-// For the 1st stage of the tree, the second input is delayed by only 1 cycle
-// and thus, the method of delay coded in the rest of the cells won't work
 module final_accumulator_tree_cell0 
 (
   input logic clk,

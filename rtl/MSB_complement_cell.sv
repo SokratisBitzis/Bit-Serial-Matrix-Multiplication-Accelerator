@@ -13,26 +13,23 @@ module MSB_complement_cell #(parameter bits = 2)
   logic [bits-2:0] carry;
   logic [bits-2:0] local_additive;
   logic [bits-2:0] tmp_load_dotP;
-  logic [bits-2:0] temp_in;//
+  logic [bits-2:0] temp_in;
   generate
     genvar i;
     for (i = 0; i < bits - 1; i++) begin
       assign local_in[i] = complement ^ in[i];
       assign local_additive[i] = additive;
       assign tmp_load_dotP[i] = load_dotP;
-      assign temp_in[i] = carry[i] | local_additive[i];//
+      assign temp_in[i] = carry[i] | local_additive[i];
     end
   endgenerate
   always_ff@ (posedge clk) begin
     if (rst) begin
       out <= 0;
     end else begin
-      //if (load_dotP) out[bits-2:0] <= (local_in[bits-2:0] ^ local_additive[bits-2:0]) ^ carry[bits-2:0];
-      if (load_dotP) out[bits-2:0] <= local_in[bits-2:0] ^ temp_in[bits-2:0];//
-      // In the MSB cell, referring to B's MSB, every input besides A's MSB one is complemented
+      if (load_dotP) out[bits-2:0] <= local_in[bits-2:0] ^ temp_in[bits-2:0];
       out[bits-1] <= in[bits-1];
     end
-    //carry <= (((local_in ^ local_additive) & carry) | (local_in & local_additive));
-    carry <= local_in & temp_in;//
+    carry <= local_in & temp_in;
   end
 endmodule
